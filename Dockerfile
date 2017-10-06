@@ -2,6 +2,8 @@ FROM alpine
 
 MAINTAINER Dan Sheffner <Dan@Sheffner.com>
 
+# This script will create a basic dev env
+
 RUN apk add --update \
     bash \
     python \
