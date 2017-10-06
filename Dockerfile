@@ -95,4 +95,4 @@ RUN mkdir -p /root/git/
 RUN echo 'set-option -g default-shell /bin/bash' > /root/.tmux.conf
 
 WORKDIR /root/
-CMD ["/usr/bin/tmux"]
+CMD ["/bin/bash"]
