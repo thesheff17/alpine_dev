@@ -2,7 +2,8 @@ FROM alpine
 
 MAINTAINER Dan Sheffner <Dan@Sheffner.com>
 
-RUN apk add --update bash \
+RUN apk add --update \
+    bash \
     python \
     python-dev \
     py-pip \
