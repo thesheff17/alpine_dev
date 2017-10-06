@@ -1,4 +1,7 @@
 FROM alpine
+
+MAINTAINER Dan Sheffner <Dan@Sheffner.com>
+
 RUN apk add --update bash \
     python \
     python-dev \
@@ -40,7 +43,6 @@ RUN \
     echo "# argument: environment name " >> /root/.virtualenvs/preactivate && \
     echo "#!/bin/bash" > /root/.virtualenvs/venv2/bin/preactivate && \
     echo "# This hook is run before this virtualenv is activated." >> /root/.virtualenvs/venv2/bin/preactivate
-
 
 # vim modules
 RUN mkdir -p /root/.vim/autoload /root/.vim/bundle /root/.vim/colors/ /root/.vim/ftplugin/
@@ -91,8 +93,6 @@ RUN mkdir -p /root/git/
 # tmux setup
 # ADD tmuxinator /root/.tmuxinator
 RUN echo 'set-option -g default-shell /bin/bash' > /root/.tmux.conf
-
-
 
 WORKDIR /root/
 CMD ["/usr/bin/tmux"]
