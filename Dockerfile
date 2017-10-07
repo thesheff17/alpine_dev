@@ -130,6 +130,7 @@ RUN export PATH=$PATH:/usr/local/go/bin && \
 
 # make share location
 RUN mkdir -p /root/git/
+RUN mkdir -p /root/bin/
 
 # Copy over samples
 COPY ./webserver.go /root/bin/
