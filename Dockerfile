@@ -39,22 +39,6 @@ RUN pip2 install virtualenvwrapper virtualenv && \
     mkvirtualenv venv2" && \
     echo "source /usr/bin/virtualenvwrapper.sh" >> /root/.bashrc
 
-# these files get messed up for some reason venv3
-RUN \
-    echo "#!/bin/bash" > /root/.virtualenvs/preactivate && \
-    echo "# This hook is run before every virtualenv is activated." >> /root/.virtualenvs/preactivate && \
-    echo "# argument: environment name " >> /root/.virtualenvs/preactivate && \
-    echo "#!/bin/bash" > /root/.virtualenvs/venv3/bin/preactivate && \
-    echo "# This hook is run before this virtualenv is activated." >> /root/.virtualenvs/venv3/bin/preactivate
-
-# these files get messed up for some reason venv2
-RUN \
-    echo "#!/bin/bash" > /root/.virtualenvs/preactivate && \
-    echo "# This hook is run before every virtualenv is activated." >> /root/.virtualenvs/preactivate && \
-    echo "# argument: environment name " >> /root/.virtualenvs/preactivate && \
-    echo "#!/bin/bash" > /root/.virtualenvs/venv2/bin/preactivate && \
-    echo "# This hook is run before this virtualenv is activated." >> /root/.virtualenvs/venv2/bin/preactivate
-
 # python3 pip
 RUN \
    /bin/bash -c " source /root/.virtualenvs/venv3/bin/activate && \
