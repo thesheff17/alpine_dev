@@ -6,18 +6,26 @@ MAINTAINER Dan Sheffner <Dan@Sheffner.com>
 
 RUN apk add --update \
     bash \
+    build-base \
+    curl \
+    cyrus-sasl-dev \
+    git \
+    go \
+    jpeg-dev \
+    libc-dev \
+    libffi-dev \
+    libmemcached-dev \
+    musl \
+    postgresql-dev \
+    py-pip \
     python \
     python-dev \
-    py-pip \
     python3 \
     python3-dev \
-    go \
-    vim \
     tmux \
-    curl \
-    git \
+    vim \
     wget \
-    libc-dev \
+    zlib-dev \
     && rm -rf /var/cache/apk/*
 
 # pip upgrades
@@ -46,6 +54,36 @@ RUN \
     echo "# argument: environment name " >> /root/.virtualenvs/preactivate && \
     echo "#!/bin/bash" > /root/.virtualenvs/venv2/bin/preactivate && \
     echo "# This hook is run before this virtualenv is activated." >> /root/.virtualenvs/venv2/bin/preactivate
+
+# python3 pip
+RUN \
+   /bin/bash -c " source /root/.virtualenvs/venv3/bin/activate && \
+   pip3 install boto3 django django-environ django-secure whitenoise \
+    django-braces django-crispy-forms django-floppyforms django-model-utils \
+    pillow django-allauth psycopg2 unicode-slugify django-autoslug pytz django-redis \
+    redis pymysql libsass django-compressor django-sass-processor django-debug-toolbar \
+    django_extensions django-nose django-axes python-dateutil pyflakes coverage sphinx \
+    werkzeug django-test-plus factory_boy ipdb sqlalchemy bpython pylibmc jupyter"
+
+# python3 flask
+RUN /bin/bash -c " source /root/.virtualenvs/venv3/bin/activate && \
+    pip3 install flask flask-bcrypt flask-login flask-migrate flask-sqlalchemy flask-script \
+    flask-testing flask-wtf mako markupsafe wtforms alembic gunicorn itsdangerous py-bcrypt "
+
+# python2 pip
+RUN \
+   /bin/bash -c " source /root/.virtualenvs/venv2/bin/activate && \
+   pip install boto3 django django-environ django-secure whitenoise \
+    django-braces django-crispy-forms django-floppyforms django-model-utils \
+    pillow django-allauth psycopg2 unicode-slugify django-autoslug pytz django-redis \
+    redis pymysql libsass django-compressor django-sass-processor django-debug-toolbar \
+    django_extensions django-nose django-axes python-dateutil pyflakes coverage sphinx \
+    werkzeug django-test-plus factory_boy ipdb sqlalchemy bpython pylibmc jupyter "
+
+# python2 flask
+RUN /bin/bash -c " source /root/.virtualenvs/venv2/bin/activate && \
+    pip install flask flask-bcrypt flask-login flask-migrate flask-sqlalchemy flask-script \
+    flask-testing flask-wtf mako markupsafe wtforms alembic gunicorn itsdangerous py-bcrypt "
 
 # vim modules
 RUN mkdir -p /root/.vim/autoload /root/.vim/bundle /root/.vim/colors/ /root/.vim/ftplugin/
@@ -92,6 +130,10 @@ RUN export PATH=$PATH:/usr/local/go/bin && \
 
 # make share location
 RUN mkdir -p /root/git/
+
+# Copy over samples
+COPY ./webserver.go /root/bin/
+COPY ./webserver.py /root/bin/
 
 # tmux setup
 # ADD tmuxinator /root/.tmuxinator
