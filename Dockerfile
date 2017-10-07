@@ -47,7 +47,7 @@ RUN \
     pillow django-allauth psycopg2 unicode-slugify django-autoslug pytz django-redis \
     redis pymysql libsass django-compressor django-sass-processor django-debug-toolbar \
     django_extensions django-nose django-axes python-dateutil pyflakes coverage sphinx \
-    werkzeug django-test-plus factory_boy ipdb sqlalchemy bpython pylibmc jupyter"
+    werkzeug django-test-plus factory_boy ipdb sqlalchemy bpython pylibmc jupyter awscli boto"
 
 # python3 flask
 RUN /bin/bash -c " source /root/.virtualenvs/venv3/bin/activate && \
@@ -62,7 +62,7 @@ RUN \
     pillow django-allauth psycopg2 unicode-slugify django-autoslug pytz django-redis \
     redis pymysql libsass django-compressor django-sass-processor django-debug-toolbar \
     django_extensions django-nose django-axes python-dateutil pyflakes coverage sphinx \
-    werkzeug django-test-plus factory_boy ipdb sqlalchemy bpython pylibmc jupyter "
+    werkzeug django-test-plus factory_boy ipdb sqlalchemy bpython pylibmc jupyter awscli boto"
 
 # python2 flask
 RUN /bin/bash -c " source /root/.virtualenvs/venv2/bin/activate && \
